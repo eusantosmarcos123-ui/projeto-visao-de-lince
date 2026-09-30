@@ -2,6 +2,8 @@
 
 > **Equipe 1** &bull; Sistema de Autenticação Biométrica Facial Passwordless com Prova de Vida Ativa e Conformidade Rigorosa com a LGPD.
 
+[![Deploy to Render](https://render.com/images/deploy-to-render-button.svg)](https://render.com/deploy?repo=https://github.com/eusantosmarcos123-ui/projeto-visao-de-lince)
+
 ---
 
 ## 📌 Cenário e Motivação
