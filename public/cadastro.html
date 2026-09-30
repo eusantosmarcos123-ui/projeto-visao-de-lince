@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Cadastro Biométrico Facial - Visão de Lince</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo-container">
+      <div class="logo-icon"><i class="fa-solid fa-eye"></i></div>
+      <div class="logo-text">
+        <h1>VISÃO DE LINCE</h1>
+        <span>HealthTech Access Security</span>
+      </div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="/"><i class="fa-solid fa-house"></i> Início</a></li>
+        <li><a href="/cadastro.html" class="active"><i class="fa-solid fa-user-plus"></i> Cadastro Facial</a></li>
+        <li><a href="/login.html"><i class="fa-solid fa-camera"></i> Login Facial</a></li>
+        <li><a href="/painel.html"><i class="fa-solid fa-lock"></i> Painel Secreto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div style="margin-bottom: 2rem;">
+      <span class="badge badge-cyan"><i class="fa-solid fa-user-gear"></i> Módulo de Registro Biométrico</span>
+      <h2 style="font-size: 2rem; margin-top: 0.5rem;">Cadastre seu Rosto no Laboratório</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem;">
+        Posicione-se em frente à câmera com boa iluminação. O algoritmo detectará seus 68 marcos anatômicos para gerar sua chave biométrica única.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Coluna da Esquerda: Câmera e Scanner -->
+      <div>
+        <div class="card" style="padding: 1.5rem; text-align: center;">
+          <div class="camera-wrapper">
+            <video id="video" autoplay playsinline muted></video>
+            <canvas id="overlay"></canvas>
+            
+            <div class="camera-hud">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="camStatusBadge" class="badge badge-amber">
+                  <i class="fa-solid fa-circle-notch fa-spin"></i> Inicializando IA...
+                </span>
+                <span id="fpsBadge" class="badge badge-cyan">FPS: --</span>
+              </div>
+
+              <!-- Retículo central para enquadramento -->
+              <div id="hudReticle" class="hud-reticle"></div>
+              <div class="hud-scan-line"></div>
+
+              <div class="hud-corner tl"></div>
+              <div class="hud-corner tr"></div>
+              <div class="hud-corner bl"></div>
+              <div class="hud-corner br"></div>
+
+              <div style="text-align: center;">
+                <span id="guideText" style="font-size: 0.8rem; background: rgba(0,0,0,0.6); padding: 0.25rem 0.75rem; border-radius: 999px; color: var(--accent-cyan);">
+                  Centralize seu rosto no círculo pontilhado
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Indicadores de Qualidade em Tempo Real -->
+          <div style="display: flex; justify-content: space-around; margin-top: 1.25rem; font-size: 0.85rem; color: var(--text-muted);">
+            <div>
+              <strong>Rosto Detectado:</strong> 
+              <span id="metricFace" style="color: var(--accent-amber);">Aguardando...</span>
+            </div>
+            <div>
+              <strong>Confiança:</strong> 
+              <span id="metricConfidence" style="color: var(--text-muted);">0%</span>
+            </div>
+            <div>
+              <strong>Qualidade Vetorial:</strong> 
+              <span id="metricQuality" style="color: var(--text-muted);">Pendente</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Coluna da Direita: Formulário e LGPD -->
+      <div>
+        <div class="card">
+          <h3 style="margin-bottom: 1.25rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-address-card" style="color: var(--accent-cyan);"></i> Dados do Colaborador
+          </h3>
+
+          <form id="formCadastro">
+            <div class="form-group">
+              <label for="nome"><i class="fa-solid fa-user"></i> Nome Completo</label>
+              <input type="text" id="nome" placeholder="Ex: Dra. Mariana Albuquerque" required>
+            </div>
+
+            <div class="grid-2" style="gap: 1rem; margin-bottom: 0;">
+              <div class="form-group">
+                <label for="matricula"><i class="fa-solid fa-id-badge"></i> Matrícula</label>
+                <input type="text" id="matricula" placeholder="Ex: BIO-4402" required>
+              </div>
+
+              <div class="form-group">
+                <label for="cargo"><i class="fa-solid fa-stethoscope"></i> Cargo / Função</label>
+                <select id="cargo" required>
+                  <option value="">Selecione...</option>
+                  <option value="Pesquisador Clínico">Pesquisador Clínico</option>
+                  <option value="Biomédico / Bioquímico">Biomédico / Bioquímico</option>
+                  <option value="Auditor de Biossegurança">Auditor de Biossegurança</option>
+                  <option value="Técnico de Laboratório">Técnico de Laboratório</option>
+                  <option value="Diretoria de Pesquisa">Diretoria de Pesquisa</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="departamento"><i class="fa-solid fa-building"></i> Departamento</label>
+              <input type="text" id="departamento" placeholder="Ex: Laboratório de Patógenos Nível 4" value="Pesquisa Clínica Especializada">
+            </div>
+
+            <!-- PARÁGRAFO OBRIGATÓRIO DE TERMOS DE USO E LGPD -->
+            <div class="lgpd-box">
+              <div style="display: flex; align-items: center; gap: 0.5rem; margin-bottom: 0.5rem; color: var(--accent-cyan); font-weight: 700;">
+                <i class="fa-solid fa-scale-balanced"></i> TERMOS DE USO & CONFORMIDADE LGPD (LEI Nº 13.709/2018)
+              </div>
+              <p style="text-align: justify; line-height: 1.45;">
+                Em estrita conformidade com os <strong>Artigos 5º (inciso II)</strong> e <strong>11 (inciso II, alínea 'g')</strong> da LGPD, os dados biométricos coletados nesta estação destinam-se única e exclusivamente à <strong>autenticação individual e prevenção a fraudes de acesso</strong> em áreas de alta contenção deste laboratório de pesquisas clínicas.
+                <br><br>
+                <strong>Garantia de Privacidade por Design (Privacy by Design):</strong> Este sistema <em>não armazena fotografias, vídeos ou imagens diretas da sua face</em> em bancos de dados. A câmera extrai imediatamente uma representação matemática abstrata (vetor numérico de 128 dimensões). Este vetor é unidirecional e criptografado, impedindo a reconstrução visual do seu rosto em caso de vazamento. O titular tem o direito de requerer a exclusão integral do seu descritor a qualquer momento conforme o Art. 18 da referida Lei.
+              </p>
+
+              <label class="lgpd-checkbox-label">
+                <input type="checkbox" id="checkLgpd" required>
+                <span>Li, compreendi e consinto com a conversão matemática da minha biometria facial para fins de controle de acesso e auditoria de segurança clínica.</span>
+              </label>
+            </div>
+
+            <button type="submit" id="btnSalvar" class="btn btn-primary" disabled>
+              <i class="fa-solid fa-camera-retro"></i> Capturar e Salvar Biometria
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast"></div>
+
+  <!-- Scripts -->
+  <script src="/js/face-api.min.js"></script>
+  <script src="/js/app-cadastrar.js"></script>
+</body>
+</html>

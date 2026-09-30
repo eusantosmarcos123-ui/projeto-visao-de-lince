@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Visão de Lince - HealthTech Biometric Access Control</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo-container">
+      <div class="logo-icon"><i class="fa-solid fa-eye"></i></div>
+      <div class="logo-text">
+        <h1>VISÃO DE LINCE</h1>
+        <span>HealthTech Access Security</span>
+      </div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="/" class="active"><i class="fa-solid fa-house"></i> Início</a></li>
+        <li><a href="/cadastro.html"><i class="fa-solid fa-user-plus"></i> Cadastro Facial</a></li>
+        <li><a href="/login.html"><i class="fa-solid fa-camera"></i> Login Facial</a></li>
+        <li><a href="/painel.html"><i class="fa-solid fa-lock"></i> Painel Secreto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Container -->
+  <main class="container">
+    <div style="text-align: center; margin-bottom: 3rem; margin-top: 1rem;">
+      <span class="badge badge-cyan" style="margin-bottom: 1rem;">
+        <i class="fa-solid fa-shield-halved"></i> Sistema Passwordless: Você é a sua senha
+      </span>
+      <h2 style="font-size: 2.5rem; font-weight: 800; letter-spacing: -0.03em; margin-bottom: 1rem;">
+        Controle de Acesso Biométrico Inteligente
+      </h2>
+      <p style="max-width: 700px; margin: 0 auto; color: var(--text-muted); font-size: 1.1rem;">
+        Desenvolvido para eliminar o empréstimo fraudulento de crachás e senhas em laboratórios de pesquisas clínicas.
+        Autenticação biométrica facial em tempo real com conformidade estrita com a LGPD e defesa ativa contra ataques de spoofing.
+      </p>
+    </div>
+
+    <!-- Cards de Ação -->
+    <div class="grid-2" style="margin-bottom: 3rem;">
+      <!-- Card Cadastro -->
+      <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(0, 240, 255, 0.1); border: 1px solid var(--accent-cyan); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent-cyan); margin-bottom: 1.5rem;">
+            <i class="fa-solid fa-id-card-clip"></i>
+          </div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.75rem;">1. Cadastro Biométrico</h3>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Capture os marcos anatômicos do seu rosto através da webcam. O sistema converte sua face em um vetor matemático de 128 dimensões, sem armazenar fotos no banco de dados.
+          </p>
+          <ul style="list-style: none; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent-emerald); margin-right: 0.5rem;"></i> Mapeamento de 68 marcos faciais</li>
+            <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent-emerald); margin-right: 0.5rem;"></i> Termo de consentimento LGPD integrado</li>
+            <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent-emerald); margin-right: 0.5rem;"></i> Vetorização unidirecional segura</li>
+          </ul>
+        </div>
+        <a href="/cadastro.html" class="btn btn-primary">
+          <i class="fa-solid fa-user-plus"></i> Realizar Cadastro Facial
+        </a>
+      </div>
+
+      <!-- Card Login -->
+      <div class="card" style="display: flex; flex-direction: column; justify-content: space-between;">
+        <div>
+          <div style="width: 50px; height: 50px; border-radius: 12px; background: rgba(16, 185, 129, 0.1); border: 1px solid var(--accent-emerald); display: flex; align-items: center; justify-content: center; font-size: 1.5rem; color: var(--accent-emerald); margin-bottom: 1.5rem;">
+            <i class="fa-solid fa-fingerprint"></i>
+          </div>
+          <h3 style="font-size: 1.4rem; margin-bottom: 0.75rem;">2. Autenticação & Prova de Vida</h3>
+          <p style="color: var(--text-muted); margin-bottom: 1.5rem;">
+            Acesse a área restrita do laboratório posicionando seu rosto diante da câmera. Nosso algoritmo valida vivacidade (anti-spoofing) e confere seu descritor biométrico instantaneamente.
+          </p>
+          <ul style="list-style: none; color: var(--text-muted); font-size: 0.9rem; margin-bottom: 1.5rem;">
+            <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-check" style="color: var(--accent-emerald); margin-right: 0.5rem;"></i> Login 100% passwordless (sem senha)</li>
+            <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-shield" style="color: var(--accent-cyan); margin-right: 0.5rem;"></i> Bloqueio contra fotos impressas ou celulares</li>
+            <li style="margin-bottom: 0.5rem;"><i class="fa-solid fa-key" style="color: var(--accent-emerald); margin-right: 0.5rem;"></i> Liberação direta do "Painel Secreto"</li>
+          </ul>
+        </div>
+        <a href="/login.html" class="btn btn-primary" style="background: linear-gradient(135deg, var(--accent-emerald), #0284c7);">
+          <i class="fa-solid fa-camera"></i> Iniciar Reconhecimento Facial
+        </a>
+      </div>
+    </div>
+
+    <!-- Seção de Métricas e Segurança -->
+    <div class="card">
+      <h3 style="font-size: 1.2rem; margin-bottom: 1.5rem; display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fa-solid fa-microchip" style="color: var(--accent-cyan);"></i> Arquitetura de Defesa & Conformidade
+      </h3>
+      <div class="sensor-grid">
+        <div class="sensor-card">
+          <h4>Privacidade e LGPD</h4>
+          <div class="sensor-value" style="font-size: 1.1rem; color: var(--accent-emerald);">Art. 11, II, 'g'</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">
+            Base legal de prevenção à fraude. Fotos não são salvas no disco.
+          </p>
+        </div>
+        <div class="sensor-card">
+          <h4>Vetor Biométrico</h4>
+          <div class="sensor-value">128-D</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">
+            Descritores matemáticos unidirecionais não reversíveis.
+          </p>
+        </div>
+        <div class="sensor-card">
+          <h4>Anti-Spoofing</h4>
+          <div class="sensor-value" style="color: var(--accent-cyan);">Liveness AI</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">
+            Desafios de microexpressões e piscamento de olhos ativos.
+          </p>
+        </div>
+        <div class="sensor-card">
+          <h4>Limiar Euclidiano</h4>
+          <div class="sensor-value">d &le; 0.52</div>
+          <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">
+            Margem de tolerância calibrada para alta precisão clínica.
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <p>Projeto "Visão de Lince" &bull; Equipe 1 &bull; Laboratório de Pesquisas Clínicas HealthTech &bull; 2026</p>
+  </footer>
+
+</body>
+</html>

@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Painel Secreto - Laboratório HealthTech Visão de Lince</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo-container">
+      <div class="logo-icon" style="background: linear-gradient(135deg, #10b981, #0284c7);"><i class="fa-solid fa-lock-open"></i></div>
+      <div class="logo-text">
+        <h1>PAINEL RESTRITO</h1>
+        <span style="color: var(--accent-emerald);">Área de Biossegurança Nível 4</span>
+      </div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="/"><i class="fa-solid fa-house"></i> Início</a></li>
+        <li><a href="/cadastro.html"><i class="fa-solid fa-user-plus"></i> Cadastro</a></li>
+        <li><a href="/login.html"><i class="fa-solid fa-camera"></i> Login Facial</a></li>
+        <li><a href="/painel.html" class="active"><i class="fa-solid fa-user-shield"></i> Painel Secreto</a></li>
+        <li>
+          <button id="btnLogout" class="btn btn-secondary" style="padding: 0.4rem 0.8rem; font-size: 0.8rem; width: auto;">
+            <i class="fa-solid fa-right-from-bracket"></i> Sair
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- Banner de Confidencialidade -->
+    <div class="secret-banner">
+      <div style="display: flex; align-items: center; gap: 1rem;">
+        <div style="font-size: 2.2rem; color: var(--accent-red);">
+          <i class="fa-solid fa-triangle-exclamation lab-badge-pulse"></i>
+        </div>
+        <div>
+          <h2 style="font-size: 1.3rem; font-weight: 800; color: #fff; letter-spacing: -0.01em;">
+            ÁREA DE PESQUISA RESTRITA &bull; BIOSSEGURANÇA NÍVEL 4
+          </h2>
+          <p style="color: #fca5a5; font-size: 0.85rem;">
+            Acesso biométrico autorizado via <strong>Visão de Lince AI</strong>. Todos os acessos são auditados e gravados em conformidade com as normas sanitárias e a LGPD.
+          </p>
+        </div>
+      </div>
+      <div>
+        <span class="badge badge-emerald" style="font-size: 0.85rem; padding: 0.5rem 1rem;">
+          <i class="fa-solid fa-circle-check"></i> Sessão Biometricamente Ativa
+        </span>
+      </div>
+    </div>
+
+    <!-- Card de Perfil do Colaborador Autenticado -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div style="display: flex; align-items: center; gap: 1.25rem;">
+          <div style="width: 60px; height: 60px; border-radius: 50%; background: linear-gradient(135deg, var(--accent-cyan), #2563eb); display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #000; box-shadow: 0 0 20px rgba(0,240,255,0.4);">
+            <i class="fa-solid fa-user-doctor"></i>
+          </div>
+          <div>
+            <h3 id="userNome" style="font-size: 1.4rem; color: #fff;">Carregando perfil...</h3>
+            <div style="display: flex; gap: 0.75rem; align-items: center; margin-top: 0.25rem;">
+              <span id="userCargo" class="badge badge-cyan">Cargo: --</span>
+              <span id="userMatricula" class="badge badge-emerald">Matrícula: --</span>
+              <span id="userDepto" style="font-size: 0.85rem; color: var(--text-muted);">Depto: --</span>
+            </div>
+          </div>
+        </div>
+
+        <div style="display: flex; gap: 0.75rem;">
+          <button id="btnRevogarLgpd" class="btn btn-danger" style="width: auto; font-size: 0.85rem;">
+            <i class="fa-solid fa-trash-can"></i> Excluir Meus Dados Biométricos (LGPD Art. 18)
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sensores de Telemetria do Laboratório -->
+    <h3 style="font-size: 1.1rem; margin-bottom: 1rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em;">
+      <i class="fa-solid fa-gauge-high" style="color: var(--accent-cyan);"></i> Telemetria dos Ambientes Críticos
+    </h3>
+    <div class="sensor-grid">
+      <div class="sensor-card">
+        <h4>Pressão de Contenção</h4>
+        <div id="sensorPressao" class="sensor-value">-15 Pa</div>
+        <p style="font-size: 0.8rem; color: var(--accent-emerald); margin-top: 0.4rem;">
+          <i class="fa-solid fa-check"></i> Fluxo de ar estéril garantido
+        </p>
+      </div>
+
+      <div class="sensor-card">
+        <h4>Freezer Criogênico ULT</h4>
+        <div id="sensorTemp" class="sensor-value">-82.4 ºC</div>
+        <p style="font-size: 0.8rem; color: var(--accent-emerald); margin-top: 0.4rem;">
+          <i class="fa-solid fa-snowflake"></i> Amostras virais preservadas
+        </p>
+      </div>
+
+      <div class="sensor-card">
+        <h4>Filtragem HEPA H14</h4>
+        <div id="sensorFiltro" class="sensor-value">99.99%</div>
+        <p style="font-size: 0.8rem; color: var(--accent-emerald); margin-top: 0.4rem;">
+          <i class="fa-solid fa-wind"></i> Particulados neutralizados
+        </p>
+      </div>
+
+      <div class="sensor-card">
+        <h4>Trava Eletromagnética</h4>
+        <div id="sensorPortas" class="sensor-value" style="font-size: 1.1rem; color: var(--accent-emerald);">RESTRITO</div>
+        <p style="font-size: 0.8rem; color: var(--text-muted); margin-top: 0.4rem;">
+          Controle por Visão de Lince AI
+        </p>
+      </div>
+    </div>
+
+    <!-- Projetos de Pesquisa Confidenciais -->
+    <div class="card" style="margin-bottom: 2rem;">
+      <h3 style="font-size: 1.2rem; margin-bottom: 1.25rem; display: flex; align-items: center; gap: 0.5rem;">
+        <i class="fa-solid fa-dna" style="color: var(--accent-cyan);"></i> Projetos Ativos do Laboratório
+      </h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Código</th>
+              <th>Projeto de Pesquisa</th>
+              <th>Status</th>
+              <th>Pesquisador Responsável</th>
+              <th>Nível de Sigilo</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaProjetos">
+            <tr>
+              <td colspan="5" style="text-align: center; color: var(--text-muted);">Carregando projetos de pesquisa...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Log de Auditoria em Tempo Real -->
+    <div class="card">
+      <h3 style="font-size: 1.2rem; margin-bottom: 1.25rem; display: flex; align-items: center; justify-content: space-between;">
+        <div style="display: flex; align-items: center; gap: 0.5rem;">
+          <i class="fa-solid fa-clock-rotate-left" style="color: var(--accent-cyan);"></i> Log de Auditoria e Prevenção a Fraudes
+        </div>
+        <span class="badge badge-cyan" style="font-size: 0.75rem;">LGPD Art. 11 Compliance</span>
+      </h3>
+      <div class="table-container">
+        <table>
+          <thead>
+            <tr>
+              <th>Data / Hora</th>
+              <th>Evento</th>
+              <th>Colaborador</th>
+              <th>Prova de Vida</th>
+              <th>Distância Euclidiana</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="tabelaLogs">
+            <tr>
+              <td colspan="6" style="text-align: center; color: var(--text-muted);">Carregando trilha de auditoria...</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast"></div>
+
+  <!-- Script -->
+  <script src="/js/app-painel.js"></script>
+</body>
+</html>

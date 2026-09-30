@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Facial & Prova de Vida - Visão de Lince</title>
+  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <a href="/" class="logo-container">
+      <div class="logo-icon"><i class="fa-solid fa-eye"></i></div>
+      <div class="logo-text">
+        <h1>VISÃO DE LINCE</h1>
+        <span>HealthTech Access Security</span>
+      </div>
+    </a>
+    <nav>
+      <ul>
+        <li><a href="/"><i class="fa-solid fa-house"></i> Início</a></li>
+        <li><a href="/cadastro.html"><i class="fa-solid fa-user-plus"></i> Cadastro Facial</a></li>
+        <li><a href="/login.html" class="active"><i class="fa-solid fa-camera"></i> Login Facial</a></li>
+        <li><a href="/painel.html"><i class="fa-solid fa-lock"></i> Painel Secreto</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="container">
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <span class="badge badge-cyan"><i class="fa-solid fa-shield-virus"></i> Controle de Acesso Restrito</span>
+      <h2 style="font-size: 2.2rem; margin-top: 0.5rem;">Autenticação Biométrica Passwordless</h2>
+      <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 650px; margin: 0 auto;">
+        Olhe diretamente para a lente. Nosso mecanismo de <strong>Prova de Vida (Anti-Spoofing)</strong> valida que você é uma pessoa real antes de autorizar a entrada no Painel Secreto do laboratório.
+      </p>
+    </div>
+
+    <div class="grid-2">
+      <!-- Câmera & Scanner HUD -->
+      <div>
+        <div class="card" style="padding: 1.5rem; text-align: center;">
+          <div class="camera-wrapper">
+            <video id="video" autoplay playsinline muted></video>
+            <canvas id="overlay"></canvas>
+            
+            <div class="camera-hud">
+              <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span id="loginStatusBadge" class="badge badge-amber">
+                  <i class="fa-solid fa-spinner fa-spin"></i> Inicializando IA...
+                </span>
+                <span id="livenessBadge" class="badge badge-amber">
+                  <i class="fa-solid fa-eye-slash"></i> Prova de Vida Pendente
+                </span>
+              </div>
+
+              <!-- Retículo com mira animada -->
+              <div id="hudReticle" class="hud-reticle"></div>
+              <div class="hud-scan-line"></div>
+
+              <div class="hud-corner tl"></div>
+              <div class="hud-corner tr"></div>
+              <div class="hud-corner bl"></div>
+              <div class="hud-corner br"></div>
+
+              <div style="text-align: center;">
+                <span id="scanFeedback" style="font-size: 0.85rem; background: rgba(0,0,0,0.7); padding: 0.35rem 1rem; border-radius: 999px; color: var(--accent-cyan); font-weight: 600;">
+                  Aguardando enquadramento...
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Banner Interativo de Prova de Vida (Anti-Spoofing) -->
+          <div id="livenessBanner" class="liveness-banner">
+            <div class="liveness-instruction" id="livenessInstruction">
+              <i class="fa-solid fa-bullseye" style="color: var(--accent-cyan);"></i> 
+              <span>Desafio: Pisque os olhos ou Dê um sorriso</span>
+            </div>
+            <div class="liveness-subtext" id="livenessSubtext">
+              Proteção contra fotos impressas e telas. Pessoas reais piscam e se movem.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Painel de Telemetria e Status da Autenticação -->
+      <div>
+        <div class="card">
+          <h3 style="margin-bottom: 1.25rem; font-size: 1.2rem; display: flex; align-items: center; gap: 0.5rem;">
+            <i class="fa-solid fa-terminal" style="color: var(--accent-cyan);"></i> Telemetria de Reconhecimento
+          </h3>
+
+          <div style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 1.5rem;">
+            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;">
+              <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Estado da Detecção</div>
+              <div id="telemetryFace" style="font-size: 1.1rem; font-weight: 700; color: #fff; margin-top: 0.2rem;">
+                Procurando face...
+              </div>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;">
+              <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Métrica de Vivacidade (Anti-Spoofing)</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.2rem;">
+                <div id="telemetryBlink" style="font-size: 1rem; font-weight: 600; color: var(--accent-amber);">
+                  Aguardando movimento biológico...
+                </div>
+                <span id="telemetryEAR" class="badge badge-cyan" style="font-size: 0.75rem;">EAR: --</span>
+              </div>
+            </div>
+
+            <div style="background: rgba(15, 23, 42, 0.6); border: 1px solid var(--border-color); border-radius: 8px; padding: 1rem;">
+              <div style="font-size: 0.8rem; color: var(--text-muted); text-transform: uppercase;">Colaborador Reconhecido</div>
+              <div id="telemetryUser" style="font-size: 1.2rem; font-weight: 800; color: var(--accent-cyan); margin-top: 0.2rem;">
+                Identificando...
+              </div>
+              <div id="telemetryScore" style="font-size: 0.85rem; color: var(--text-muted); margin-top: 0.2rem;">
+                Distância Euclidiana: -- | Precisão: --
+              </div>
+            </div>
+          </div>
+
+          <!-- Informações de Segurança -->
+          <div style="border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+            <div style="display: flex; align-items: center; gap: 0.5rem; color: var(--accent-emerald); font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem;">
+              <i class="fa-solid fa-lock"></i> Canal Criptografado & Auditoria Ativa
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted);">
+              Cada tentativa de acesso é registrada com assinatura temporal e métrica euclidiana para fins de auditoria de biossegurança hospitalar.
+            </p>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; gap: 1rem;">
+            <a href="/cadastro.html" class="btn btn-secondary" style="flex: 1;">
+              <i class="fa-solid fa-user-plus"></i> Não tem cadastro?
+            </a>
+            <button id="btnManualMatch" class="btn btn-primary" style="flex: 1;" disabled>
+              <i class="fa-solid fa-bolt"></i> Autenticar Agora
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <div id="toast"></div>
+
+  <!-- Scripts -->
+  <script src="/js/face-api.min.js"></script>
+  <script src="/js/app-login.js"></script>
+</body>
+</html>
